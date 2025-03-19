@@ -10,10 +10,12 @@ public class GiteeApiClient
 {
     internal HttpClient Client { get; private set; } = null!;
 
-    public GiteeApiClient(IHttpClientFactory clientFactory, IConfiguration configuration)
+    public GiteeApiClient(IHttpClientFactory clientFactory, IConfiguration configuration, ILogger<GiteeApiClient> logger)
     {
         Client = clientFactory.CreateClient();
         _config = configuration.GetSection("ConfigProvider").Get<AppConfigProviderConfig>() ?? new();
+        logger.LogInformation("appid: {conf} ", _config.AppId);
+        logger.LogInformation("repoName: {conf} ", _config.RepoName);
     }
 
     private readonly AppConfigProviderConfig _config;
