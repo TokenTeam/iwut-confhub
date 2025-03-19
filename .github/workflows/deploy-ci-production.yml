@@ -12,6 +12,8 @@ jobs:
     steps: 
       - name: checkout
         uses: actions/checkout@v4
+      - name: list
+        run: ls -a
       - name: docker setup
         uses: docker/setup-docker-action@v4.3.0
       - name: docker build
