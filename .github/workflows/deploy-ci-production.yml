@@ -23,7 +23,16 @@ jobs:
       - name: list files
         run: ls -a
       - name: docker build
-        run: docker build . --file ${{ vars.DOCKER_FILE }} --tag ${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
+        run: |
+          docker build . \
+            --build-arg REPO_OWNER=${{ vars.ENV_REPO_OWNER }} \
+            --build-arg REPO_NAME=${{ vars.ENV_REPO_NAME }} \
+            --build-arg BRANCH=${{ vars.ENV_BRANCH }} \
+            --build-arg USER_NAME=${{ secrets.ENV_USER_NAME }} \
+            --build-arg PASSWORD=${{ secrets.ENV_PASSWORD }} \
+            --build-arg APP_ID=${{ secrets.ENV_APP_ID }} \
+            --build-arg APP_SECRET=${{ secrets.ENV_SECRET }} \
+            --file ${{ vars.DOCKER_FILE }} --tag ${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
       - name: docker tag
         run: docker tag ${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }} ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
       - name: docker push
