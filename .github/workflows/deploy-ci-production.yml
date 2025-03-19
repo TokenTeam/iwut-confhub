@@ -25,6 +25,6 @@ jobs:
       - name: docker build
         run: docker build . --file ${{ vars.DOCKER_FILE }} --tag ${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
       - name: docker tag
-        run: docker tag ${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }} ${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
+        run: docker tag ${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }} ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
       - name: docker push
         run: docker push ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
