@@ -48,6 +48,9 @@ jobs:
           username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
           password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
           registry: ${{ secrets.DOCKER_REGISTRY }}
+      - name: id test
+        run: |
+          whoami
       - name: docker pull
         run: |
           docker pull ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:latest
