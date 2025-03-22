@@ -53,7 +53,7 @@ jobs:
           whoami
       - name: docker pull
         run: |
-          docker pull ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:latest
+          docker pull ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:13996695112
         # with:
         #   # docker image. Example sandipj/react-ssr-doc
         #   docker-image: ${{ vars.DOCKER_IMAGE_NAME }}
