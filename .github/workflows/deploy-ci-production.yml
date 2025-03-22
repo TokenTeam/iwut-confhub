@@ -35,8 +35,8 @@ jobs:
             --file ${{ vars.DOCKER_FILE }} --tag ${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
       - name: docker tag
         run: docker tag ${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }} ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
-      # - name: docker push
-      #   run: docker push ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
+      - name: docker push
+        run: docker push ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
   deploy:
     needs: publish
     environment: production
@@ -47,9 +47,9 @@ jobs:
           sudo docker login ${{ secrets.DOCKER_REGISTRY }} --username=${{ secrets.DOCKER_REGISTRY_USERNAME }} --password=${{ secrets.DOCKER_REGISTRY_PASSWORD }}
       - name: docker pull
         run: |
-          sudo docker pull ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:13996695112
+          sudo docker pull ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
       - name: Deploy with Docker run
         run: |
           sudo docker stop ${{ vars.DOCKER_CONTAINER_NAME }} || true
           sudo docker rm ${{ vars.DOCKER_CONTAINER_NAME }} || true
-          sudo docker run -d --name ${{ vars.DOCKER_CONTAINER_NAME }} -p ${{ vars.DOCKER_CONTAINER_PORT }}:80 ${{ vars.DOCKER_IMAGE_NAME }}:13996695112
+          sudo docker run -d --name ${{ vars.DOCKER_CONTAINER_NAME }} -p ${{ vars.DOCKER_CONTAINER_PORT }}:80 ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
