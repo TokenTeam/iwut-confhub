@@ -49,14 +49,15 @@ jobs:
           password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
           registry: ${{ secrets.DOCKER_REGISTRY }}
       - name: docker pull
-        uses: codebysandip/docker-pull-auto-action@v1.5
-        with:
-          # docker image. Example sandipj/react-ssr-doc
-          docker-image: ${{ vars.DOCKER_IMAGE_NAME }}
-          # docker tag which you just generated. Example latest
-          docker-tag: latest
-          # domain on which request will send
-          domain: ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}
+        run: |
+          docker pull ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:latest
+        # with:
+        #   # docker image. Example sandipj/react-ssr-doc
+        #   docker-image: ${{ vars.DOCKER_IMAGE_NAME }}
+        #   # docker tag which you just generated. Example latest
+        #   docker-tag: latest
+        #   # domain on which request will send
+        #   domain: ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}
       - name: Deploy with Docker run
         run: |
           docker stop ${{ vars.DOCKER_CONTAINER_NAME }} || true
