@@ -32,6 +32,7 @@ jobs:
             --build-arg PASSWORD=${{ secrets.ENV_PASSWORD }} \
             --build-arg APP_ID=${{ secrets.ENV_APP_ID }} \
             --build-arg APP_SECRET=${{ secrets.ENV_SECRET }} \
+            --build-arg DOTNET_ENV=${{ vars.DOTNET_ENV }} \
             --file ${{ vars.DOCKER_FILE }} --tag ${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
       - name: docker tag
         run: docker tag ${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }} ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
