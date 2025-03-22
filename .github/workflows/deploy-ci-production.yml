@@ -53,14 +53,7 @@ jobs:
           whoami; id $USER
       - name: docker pull
         run: |
-          docker pull ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:13996695112
-        # with:
-        #   # docker image. Example sandipj/react-ssr-doc
-        #   docker-image: ${{ vars.DOCKER_IMAGE_NAME }}
-        #   # docker tag which you just generated. Example latest
-        #   docker-tag: latest
-        #   # domain on which request will send
-        #   domain: ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}
+          sudo docker pull ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:13996695112
       - name: Deploy with Docker run
         run: |
           docker stop ${{ vars.DOCKER_CONTAINER_NAME }} || true
