@@ -43,11 +43,14 @@ jobs:
     runs-on: sh-05_gateway
     steps:
       - name: docker login
+        uses: docker/login-action@v3.4.0
+        with:
+          username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+          registry: ${{ secrets.DOCKER_REGISTRY }}
+      - name: id check
         run: |
-          docker login ${{ secrets.DOCKER_REGISTRY }} --username=${{ secrets.DOCKER_REGISTRY_USERNAME }} --password=${{ secrets.DOCKER_REGISTRY_PASSWORD }}
-      - name: id test
-        run: |
-          whoami
+          whoami; id $USER
       - name: docker pull
         run: |
           docker pull ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:13996695112
