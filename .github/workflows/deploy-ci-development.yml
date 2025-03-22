@@ -41,7 +41,7 @@ jobs:
   deploy:
     needs: publish
     environment: development
-    runs-on: sh-05_gateway
+    runs-on: sh-06_dev
     steps:
       - name: docker login
         run: |
