@@ -2,7 +2,7 @@ name: Deploy to Self-Hosted Server
 
 on:
   workflow_run:
-    workflows: ["CI Production"]
+    workflows: ["Deploy Production Environment"]
     types:
       - completed
 
