@@ -15,6 +15,8 @@ ENV ConfigProvider__Password=$PASSWORD
 ENV ConfigProvider__AppId=$APP_ID
 ENV ConfigProvider__AppSecret=$APP_SECRET
 
+ENV DOTNET_ENVIRONMENT=$DOTNET_ENV
+
 WORKDIR /app
 EXPOSE 80
 
