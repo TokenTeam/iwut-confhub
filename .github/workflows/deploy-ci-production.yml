@@ -54,3 +54,4 @@ jobs:
           sudo docker stop ${{ vars.DOCKER_CONTAINER_NAME }} || true
           sudo docker rm ${{ vars.DOCKER_CONTAINER_NAME }} || true
           sudo docker run -d --name ${{ vars.DOCKER_CONTAINER_NAME }} -p ${{ vars.DOCKER_CONTAINER_PORT }}:80 ${{ secrets.DOCKER_REGISTRY }}/${{ vars.DOCKER_NAMESPACE }}/${{ vars.DOCKER_IMAGE_NAME }}:${{ github.run_id }}
+          sudo docker logout ${{ secrets.DOCKER_REGISTRY }}
