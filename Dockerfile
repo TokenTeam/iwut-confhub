@@ -1,22 +1,14 @@
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
-ARG REPO_OWNER
-ARG REPO_NAME
-ARG BRANCH
-ARG USER_NAME
-ARG PASSWORD
-ARG APP_ID
-ARG APP_SECRET
-ARG DOTNET_ENV
 
-ENV ConfigProvider__RepoOwner=$REPO_OWNER
-ENV ConfigProvider__RepoName=$REPO_NAME
-ENV ConfigProvider__Branch=$BRANCH
-ENV ConfigProvider__UserName=$USER_NAME
-ENV ConfigProvider__Password=$PASSWORD
-ENV ConfigProvider__AppId=$APP_ID
-ENV ConfigProvider__AppSecret=$APP_SECRET
+ENV ConfigProvider__RepoOwner=""
+ENV ConfigProvider__RepoName=""
+ENV ConfigProvider__Branch=""
+ENV ConfigProvider__UserName=""
+ENV ConfigProvider__Password=""
+ENV ConfigProvider__AppId=""
+ENV ConfigProvider__AppSecret=""
 
-ENV DOTNET_ENVIRONMENT=$DOTNET_ENV
+ENV DOTNET_ENVIRONMENT=""
 
 WORKDIR /app
 EXPOSE 80
