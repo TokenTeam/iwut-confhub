@@ -31,7 +31,7 @@ jobs:
     needs: publish
     name: Deploy docker image
     environment: development
-    runs-on: sh-06_dev
+    runs-on: dev
     steps:
       - name: Docker pull
         run: |
