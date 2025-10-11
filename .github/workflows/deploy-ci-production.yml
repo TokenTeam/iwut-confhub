@@ -30,7 +30,7 @@ jobs:
   deploy:
     needs: publish
     environment: production
-    runs-on: sh-05_gateway
+    runs-on: prod
     steps:
       - name: Docker pull
         run: |
