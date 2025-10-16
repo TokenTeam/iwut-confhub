@@ -13,12 +13,12 @@ public class BlobController(AppConfigProvider appConfigProvider) : ControllerBas
     [Produces("application/json")]
     public IActionResult GetConfig([FromHeader(Name = "iwut-platform")] string platform, [FromRoute] string key)
     {
+        platform = platform.ToLower();
         var content = appConfigProvider.GetConfig(key, platform);
         if (string.IsNullOrEmpty(content))
         {
             return Problem("指定的配置不存在");
         }
-
-        return new RawJsonResult(content);
+        return new RawJsonResult(200, "success", content);
     }
 }

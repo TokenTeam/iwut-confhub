@@ -8,11 +8,11 @@ public class AppConfigProvider
     public AppConfigProvider(GiteeApiClient giteeClient, IMemoryCache cache)
     {
         _giteeApiClient = giteeClient;
-        _cahce = cache;
+        _cache = cache;
     }
 
     private readonly GiteeApiClient _giteeApiClient;
-    private readonly IMemoryCache _cahce;
+    private readonly IMemoryCache _cache;
     public const string CacheKey = "AppConfig";
 
     public async Task RefreshConfig()
@@ -40,12 +40,12 @@ public class AppConfigProvider
             configDict.Add($"{configKey}", baseJobj.ToString());
         }
 
-        _cahce.Set(CacheKey, configDict);
+        _cache.Set(CacheKey, configDict);
     }
 
     public string? GetConfig(string key, string platform)
     {
-        var dict = _cahce.Get<Dictionary<string, string>>(CacheKey);
+        var dict = _cache.Get<Dictionary<string, string>>(CacheKey);
         if (dict is null) return null;
         var success = dict.TryGetValue($"{key}.{platform}", out var config);
         if (!success)
